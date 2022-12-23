@@ -5,22 +5,25 @@ import { Configuration, OpenAIApi } from 'openai'
 
 dotenv.config()
 
+// setup openai
 const configuration = new Configuration({
   apiKey: process.env.OPENAI_API_KEY,
 });
-
 const openai = new OpenAIApi(configuration);
 
+// create node server app
 const app = express()
 app.use(cors())
 app.use(express.json())
 
+// optional get
 app.get('/', async (req, res) => {
   res.status(200).send({
     message: 'Hello from CodeX!'
   })
 })
 
+// required post
 app.post('/', async (req, res) => {
   try {
     const prompt = req.body.prompt;
@@ -45,4 +48,10 @@ app.post('/', async (req, res) => {
   }
 })
 
-app.listen(5000, () => console.log('AI server started on http://localhost:5000'))
+// start app
+const port = process.env.PORT;
+
+app.listen(port, () => {
+    console.log(`AI server running at http://localhost:${port}`);
+  }
+)

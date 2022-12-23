@@ -1,8 +1,8 @@
 import bot from './assets/bot.svg'
 import user from './assets/user.svg'
 
-const form = document.querySelector('form')
 const chatContainer = document.querySelector('#chat_container')
+const form = document.querySelector('form')
 
 let loadInterval
 
@@ -86,7 +86,8 @@ const handleSubmit = async (e) => {
     // messageDiv.innerHTML = "..."
     loader(messageDiv)
 
-    const response = await fetch('https://codex-im0y.onrender.com/', {
+    // server listens on PORT=5000 (see server/.env)
+    const response = await fetch('https://localhost:5000/', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
